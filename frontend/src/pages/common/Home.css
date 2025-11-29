@@ -1,0 +1,878 @@
+/* ---------------------- */
+/* Global + Background    */
+/* ---------------------- */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --blue: #1b6cff;
+  --blue-soft: #4da3ff;
+  --red: #ff4b5c;
+  --dark: #050816;
+  --dark-soft: #0b1020;
+  --card-bg: #ffffff;
+  --text-main: #0a0f1f;
+  --muted: #7a8095;
+  --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.25);
+  --radius-xl: 26px;
+  --transition-fast: 0.25s ease-out;
+  --transition-med: 0.35s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(27, 108, 255, 0.18) 0, transparent 55%),
+    radial-gradient(circle at 90% 80%, rgba(255, 75, 92, 0.18) 0, transparent 55%),
+    linear-gradient(135deg, #050816 0%, #0b1020 40%, #050816 100%);
+  color: var(--text-main);
+}
+
+/* ---------------------- */
+/* Layout Containers      */
+/* ---------------------- */
+
+.home-page {
+  min-height: 100vh;
+  background: rgba(179, 220, 231, 0.95);
+  color: #fff;
+}
+
+.home-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 90px 24px 80px;
+}
+
+/* ---------------------- */
+/* Top Nav                */
+/* ---------------------- */
+
+.home-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 32px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: blur(16px);
+  background: linear-gradient(
+    to bottom,
+    rgba(5, 8, 22, 0.98),
+    rgba(5, 8, 22, 0.9),
+    transparent
+  );
+}
+
+.home-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.home-logo-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%, #7da3d2, #1b6cff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #050816;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+}
+
+.home-logo-text-main {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.home-logo-text-sub {
+  font-size: 0.75rem;
+  color: #d0d4e4;
+}
+
+.home-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.home-nav-link {
+  font-size: 0.9rem;
+  color: #d5daeb;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 4px;
+  transition: color var(--transition-fast);
+}
+
+.home-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(90deg, var(--blue), var(--red));
+  border-radius: 999px;
+  transition: width var(--transition-fast);
+}
+
+.home-nav-link:hover {
+  color: #ffffff;
+}
+
+.home-nav-link:hover::after,
+.home-nav-link-active::after {
+  width: 100%;
+}
+
+.home-nav-link-active {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.home-logout-btn {
+  padding: 8px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(5, 8, 22, 0.7);
+  color: #fff;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background var(--transition-fast), transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.home-logout-btn:hover {
+  background: linear-gradient(135deg, var(--red), var(--blue));
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+/* ---------------------- */
+/* Hero Section           */
+/* ---------------------- */
+
+.hero-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
+  gap: 56px;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.hero-left-heading {
+  font-size: 2.7rem;
+  line-height: 1.1;
+  font-weight: 700;
+  color: #0a0f1f;
+  letter-spacing: 0.02em;
+}
+
+.hero-left-heading span {
+  color: #1b6cff;
+}
+
+.hero-subtitle {
+  margin-top: 18px;
+  font-size: 0.98rem;
+  color: #233043;
+  max-width: 420px;
+}
+
+.hero-cta-row {
+  margin-top: 26px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.hero-cta-btn {
+  border-radius: 999px;
+  padding: 12px 22px;
+  border: none;
+  outline: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+    background var(--transition-fast), color var(--transition-fast);
+}
+
+.hero-cta-btn-primary {
+  background: radial-gradient(circle at 10% 10%, #ffffff, var(--blue));
+  box-shadow: 0 16px 35px rgba(27, 108, 255, 0.55);
+  color: #050816;
+}
+
+.hero-cta-btn-primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
+}
+
+/* Make Find Pharmacies look exactly like Find Doctors */
+.hero-cta-btn-secondary {
+  background: radial-gradient(circle at 10% 10%, #ffffff, var(--blue));
+  box-shadow: 0 16px 35px rgba(27, 108, 255, 0.55);
+  color: #050816;
+  border: none;
+}
+
+.hero-cta-btn-secondary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
+  background: radial-gradient(circle at 10% 10%, #ffffff, #3d8bff);
+}
+
+.hero-pill-list {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: #000000;
+}
+
+.hero-pill-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #000000;
+  font-weight: 600;
+}
+
+/* ---------------------- */
+/* Doctor Card (Right)    */
+/* ---------------------- */
+
+.hero-right-card {
+  background: radial-gradient(circle at 0% 0%, #ffffff, #eef4ff);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-soft);
+  padding: 24px 26px;
+  color: #111322;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-right-card::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at 0% 0%, rgba(27, 108, 255, 0.15), transparent 60%),
+    radial-gradient(circle at 90% 100%, rgba(255, 75, 92, 0.13), transparent 55%);
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+.hero-right-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-available-text {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.hero-doc-main {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.hero-doc-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, var(--blue-soft), #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+}
+
+.hero-doc-name {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.hero-doc-speciality {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.hero-doc-meta {
+  margin-top: 14px;
+  font-size: 0.82rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hero-book-btn {
+  margin-top: 18px;
+  width: 100%;
+  border-radius: 999px;
+  padding: 12px 24px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: linear-gradient(120deg, var(--blue), var(--red));
+  color: #ffffff;
+  letter-spacing: 0.02em;
+  box-shadow: 0 16px 28px rgba(27, 108, 255, 0.45);
+  transition: transform var(--transition-med), box-shadow var(--transition-med),
+    filter var(--transition-med);
+}
+
+.hero-book-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+  filter: brightness(1.04);
+}
+
+.hero-card-features {
+  margin-top: 18px;
+  font-size: 0.82rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hero-next-appointments {
+  margin-top: 18px;
+  font-size: 0.8rem;
+}
+
+.hero-next-appointments strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.hero-stats {
+  margin-top: 16px;
+  display: flex;
+  gap: 18px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* ---------------------- */
+/* Floating Role Cards    */
+/* ---------------------- */
+
+.roles-section {
+  margin-top: 80px;
+  padding: 40px 24px 10px;
+  border-radius: 32px;
+  background: radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.08), transparent 60%),
+    radial-gradient(circle at 100% 100%, rgba(255, 75, 92, 0.09), transparent 60%),
+    rgba(5, 8, 22, 0.9);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+}
+
+.roles-heading {
+  text-align: center;
+  color: #ffffff;
+}
+
+.roles-heading h2 {
+  font-size: 1.7rem;
+  font-weight: 600;
+}
+
+.roles-heading p {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #b8bdd6;
+}
+
+.role-cards-grid {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+
+/* Single floating card */
+
+.role-card {
+  position: relative;
+  padding: 22px 20px 22px;
+  border-radius: 22px;
+  background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.9), #f5f6ff);
+  box-shadow: 0 18px 40px rgba(6, 14, 41, 0.38);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform var(--transition-med), box-shadow var(--transition-med),
+    background var(--transition-med), border var(--transition-med);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.role-card::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at 0% 0%, rgba(27, 108, 255, 0.18), transparent 55%),
+    radial-gradient(circle at 100% 100%, rgba(255, 75, 92, 0.18), transparent 60%);
+  opacity: 0;
+  transition: opacity var(--transition-med);
+}
+
+.role-card-content {
+  position: relative;
+  z-index: 1;
+}
+
+.role-card-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.role-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #091021;
+}
+
+.role-card-text {
+  font-size: 0.82rem;
+  color: #60657b;
+  min-height: 48px;
+}
+
+.role-card-btn {
+  margin-top: 12px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.25);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+/* Hover = float + glow */
+.role-card:hover {
+  transform: translateY(-12px) translateZ(0) scale(1.02);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.65);
+  border-color: rgba(27, 108, 255, 0.8);
+}
+
+.role-card:hover::before {
+  opacity: 1;
+}
+
+.role-card:hover .role-card-btn {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.35);
+}
+
+/* Role-specific accent colors using theme */
+.role-card--patient .role-card-icon {
+  background: rgba(27, 108, 255, 0.15);
+}
+
+.role-card--doctor .role-card-icon {
+  background: rgba(255, 75, 92, 0.13);
+}
+
+.role-card--pharmacist .role-card-icon {
+  background: rgba(27, 108, 255, 0.12);
+}
+
+.role-card--admin .role-card-icon {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* ------------------------- */
+/* Floating Voice Button     */
+/* ------------------------- */
+
+.voice-assistant-btn {
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 20%, #ffffff, var(--blue));
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+  z-index: 40;
+}
+
+.voice-assistant-btn:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.9);
+  filter: brightness(1.05);
+}
+
+/* When listening, give red glow */
+.voice-assistant-btn.listening {
+  background: radial-gradient(circle at 30% 20%, #ffffff, var(--red));
+}
+
+/* ---------------------- */
+/* Shared Base Styles     */
+/* For all inner pages    */
+/* ---------------------- */
+
+.page,
+.doctors-page,
+.dashboard-page {
+  max-width: 1100px;
+  margin: 40px auto 80px;
+  padding: 0 24px;
+  color: #0a0f1f;
+}
+
+/* Section headers (dashboards + doctor list) */
+.dashboard-header,
+.doctors-header,
+.patient-header,
+.pharmacy-header,
+.admin-header {
+  margin-bottom: 24px;
+}
+
+.dashboard-header h2,
+.doctors-header h2,
+.patient-header h2,
+.pharmacy-header h2,
+.admin-header h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #0a0f1f;
+}
+
+.dashboard-header p,
+.doctors-header p,
+.patient-header p,
+.pharmacy-header p,
+.admin-header p {
+  margin-top: 6px;
+  color: #3a4254;
+  font-size: 0.95rem;
+}
+
+/* Generic grid + cards for dashboards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+  padding: 20px 22px;
+}
+
+.card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.list {
+  margin: 10px 0 16px;
+  font-size: 0.88rem;
+  color: #374151;
+  padding-left: 16px;
+}
+
+.list li {
+  margin-bottom: 4px;
+}
+
+.muted {
+  color: #6b7280;
+}
+
+/* Buttons */
+.btn {
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 10px 18px;
+  outline: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.btn-primary {
+  background: radial-gradient(circle at 10% 10%, #ffffff, var(--blue));
+  color: #050816;
+  box-shadow: 0 12px 28px rgba(27, 108, 255, 0.45);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.35);
+}
+
+.btn-small {
+  padding: 8px 14px;
+  font-size: 0.82rem;
+}
+
+/* Filter row used in some pages */
+.filters-row {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+}
+
+/* Form groups shared across pages */
+.form-group label {
+  font-size: 0.85rem;
+  color: #4b5563;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.form-group select,
+.form-group input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  font-size: 0.9rem;
+  outline: none;
+  background: #ffffff;
+}
+
+.form-group select:focus,
+.form-group input:focus {
+  border-color: #1b6cff;
+  box-shadow: 0 0 0 2px rgba(27, 108, 255, 0.3);
+}
+
+/* ---------------------- */
+/* DoctorList Page – new  */
+/* ---------------------- */
+
+/* Removed empty .doctors-page ruleset — layout uses the shared .page rules */
+
+.doctors-header {
+  margin-bottom: 20px;
+}
+
+.doctors-header h2 {
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: #0a0f1f;
+}
+
+.doctors-header p {
+  margin-top: 6px;
+  font-size: 0.94rem;
+  color: #4b5563;
+}
+
+/* big glass panel */
+.doctors-inner-panel {
+  border-radius: 32px;
+  background: radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.96), #eef6ff);
+  box-shadow: 0 28px 60px rgba(15, 23, 42, 0.35);
+  padding: 24px 22px 30px;
+}
+
+/* Filters bar */
+.doctors-filters {
+  margin-top: 8px;
+  padding: 16px 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.12);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.form-group-search input {
+  padding-left: 12px;
+}
+
+/* Doctor cards */
+.doctor-cards-grid {
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.doctor-cards-grid .doctor-card {
+  position: relative;
+  border-radius: 24px;
+  background: radial-gradient(circle at 0 0, #ffffff, #f5f7ff);
+  box-shadow: 0 20px 42px rgba(15, 23, 42, 0.18);
+  padding: 20px 20px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.doctor-cards-grid .doctor-card::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at 0% 0%, rgba(27, 108, 255, 0.1), transparent 55%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+
+.doctor-cards-grid .doctor-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 26px 55px rgba(15, 23, 42, 0.25);
+}
+
+.doctor-cards-grid .doctor-card:hover::before {
+  opacity: 1;
+}
+
+.doctor-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.doctor-speciality {
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin-top: 4px;
+}
+
+.doctor-meta {
+  font-size: 0.85rem;
+  margin-top: 6px;
+  color: #6b7280;
+}
+
+/* Book button in cards */
+.doctor-book-btn {
+  margin-top: 14px;
+  border-radius: 999px;
+  padding: 8px 14px;
+  background: radial-gradient(circle at 10% 10%, #ffffff, var(--blue));
+  color: #050816;
+  box-shadow: 0 14px 30px rgba(27, 108, 255, 0.55);
+  border: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.doctor-book-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 38px rgba(15, 23, 42, 0.35);
+}
+
+.no-results {
+  margin-top: 26px;
+  text-align: center;
+  color: #555;
+  font-size: 0.92rem;
+}
+
+/* ---------------------- */
+/* Responsive             */
+/* ---------------------- */
+
+@media (max-width: 960px) {
+  .hero-section {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .hero-right-card {
+    order: -1;
+  }
+
+  .role-cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .doctors-filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .home-navbar {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .hero-left-heading {
+    font-size: 2.1rem;
+  }
+
+  .role-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .roles-section {
+    padding-inline: 16px;
+  }
+
+  .doctors-filters {
+    grid-template-columns: 1fr;
+  }
+
+  .doctors-inner-panel {
+    padding: 20px 14px 26px;
+    border-radius: 20px;
+  }
+}

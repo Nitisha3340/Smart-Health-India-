@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import DoctorPatientVerify from "./pages/doctor/DoctorPatientVerify";
+import DoctorPatientList from "./pages/doctor/DoctorPatientList";
 
 // Common
 import Header from "./components/common/Header";
@@ -45,24 +47,26 @@ function App() {
                 </RoleRoute>
               }
             />
-            <Route
-              path="/patient/profile"
-              element={
-                <RoleRoute allowedRoles={["patient"]}>
-                  <PatientProfile />
-                </RoleRoute>
-              }
-            />
+            {/* Doctor: verify identity to view patients */}
+<Route
+  path="/doctor/patients/verify"
+  element={
+    <RoleRoute allowedRoles={["doctor"]}>
+      <DoctorPatientVerify />
+    </RoleRoute>
+  }
+/>
 
-            {/* Doctor */}
-            <Route
-              path="/doctor/dashboard"
-              element={
-                <RoleRoute allowedRoles={["doctor"]}>
-                  <DoctorDashboard />
-                </RoleRoute>
-              }
-            />
+{/* Doctor: patients list */}
+<Route
+  path="/doctor/patients/:doctorId"
+  element={
+    <RoleRoute allowedRoles={["doctor"]}>
+      <DoctorPatientList />
+    </RoleRoute>
+  }
+/>
+
 
             {/* Pharmacist */}
             <Route
