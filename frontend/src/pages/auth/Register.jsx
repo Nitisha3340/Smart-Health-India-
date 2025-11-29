@@ -1,57 +1,61 @@
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { registerSchema } from "../../validation/authSchema";
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Register() {
-  const [successMsg, setSuccessMsg] = useState("");
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(registerSchema),
-  });
-
-  const onSubmit = (data) => {
-    console.log("Registration data:", data);
-
-    setSuccessMsg("Registration Successful! Redirecting to login...");
-    setTimeout(() => {
-      window.location.href = "/login";
-    }, 1500);
-  };
-
   return (
-    <div style={{ width: "350px", margin: "40px auto" }}>
-      <h2>Register</h2>
+    <div className="page auth-page">
+      <div className="auth-card">
+        <h2>Create your account</h2>
+        <p className="auth-subtitle">
+          Join Smart Health India+ and start using virtual consultations in minutes.
+        </p>
 
-      {successMsg && <p style={{ color: "green" }}>{successMsg}</p>}
+        <form
+          className="auth-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            // later: call API
+            window.location.href = "/login";
+          }}
+        >
+          <div className="form-group">
+            <label>Full Name</label>
+            <input type="text" placeholder="Enter your full name" required />
+          </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-        
-        <input type="text" placeholder="Full Name" {...register("name")} />
-        <p style={{ color: "red" }}>{errors.name?.message}</p>
+          <div className="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="you@example.com" required />
+          </div>
 
-        <input type="email" placeholder="Email" {...register("email")} />
-        <p style={{ color: "red" }}>{errors.email?.message}</p>
+          <div className="form-group">
+            <label>Password</label>
+            <input type="password" placeholder="Create a strong password" required />
+          </div>
 
-        <input type="password" placeholder="Password" {...register("password")} />
-        <p style={{ color: "red" }}>{errors.password?.message}</p>
+          <div className="form-group">
+            <label>Role</label>
+            <select defaultValue="" required>
+              <option value="" disabled>
+                Select your role
+              </option>
+              <option value="patient">Patient</option>
+              <option value="doctor">Doctor</option>
+              <option value="pharmacist">Pharmacist</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
 
-        <select {...register("role")}>
-          <option value="">Select Role</option>
-          <option value="patient">Patient</option>
-          <option value="doctor">Doctor</option>
-          <option value="admin">Admin</option>
-          <option value="pharmacist">Pharmacist</option>
-        </select>
-        <p style={{ color: "red" }}>{errors.role?.message}</p>
+          <button type="submit" className="btn btn-primary auth-btn">
+            Register
+          </button>
+        </form>
 
-        <button type="submit">Register</button>
-      </form>
+        <p className="auth-footer-text">
+          Already have an account? <Link to="/login">Login</Link>
+        </p>
+      </div>
     </div>
   );
 }
+
 

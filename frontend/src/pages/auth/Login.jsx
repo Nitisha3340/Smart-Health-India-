@@ -1,46 +1,74 @@
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { loginSchema } from "../../validation/authSchema";
-import { useState } from "react";
+// src/pages/auth/Login.jsx
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function Login() {
-  const [successMsg, setSuccessMsg] = useState("");
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(loginSchema),
-  });
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = new FormData(e.target);
 
-  const onSubmit = (data) => {
-    console.log("Login data:", data);
+    const email = form.get("email");
+    const role = form.get("role") || "patient"; // default patient
 
-    setSuccessMsg("Login validated! (Backend coming next…)");
+    const userData = {
+      name: "Demo User",
+      email,
+      role,
+    };
 
-    setTimeout(() => {
-      window.location.href = "/patient/dashboard";
-    }, 1200);
+    login(userData);
+
+    if (role === "patient") navigate("/patient/dashboard");
+    if (role === "doctor") navigate("/doctor/dashboard");
+    if (role === "pharmacist") navigate("/pharmacist/dashboard");
+    if (role === "admin") navigate("/admin/dashboard");
   };
 
   return (
-    <div style={{ width: "350px", margin: "40px auto" }}>
-      <h2>Login</h2>
+    <div className="page auth-page">
+      <div className="auth-card">
+        <h2>Login</h2>
+        <p className="auth-subtitle">Login to continue to Smart Health India+.</p>
 
-      {successMsg && <p style={{ color: "green" }}>{successMsg}</p>}
+        <form className="auth-form" onSubmit={handleLogin}>
+          <div className="form-group">
+            <label>Email</label>
+            <input name="email" type="email" placeholder="you@example.com" required />
+          </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-        
-        <input type="email" placeholder="Email" {...register("email")} />
-        <p style={{ color: "red" }}>{errors.email?.message}</p>
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              name="password"
+              type="password"
+              placeholder="••••••••"
+              required
+            />
+          </div>
 
-        <input type="password" placeholder="Password" {...register("password")} />
-        <p style={{ color: "red" }}>{errors.password?.message}</p>
+          <div className="form-group">
+            <label>Role</label>
+            <select name="role" required>
+              <option value="">Select your role</option>
+              <option value="patient">Patient</option>
+              <option value="doctor">Doctor</option>
+              <option value="pharmacist">Pharmacist</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
 
-        <button type="submit">Login</button>
-      </form>
+          <button type="submit" className="btn btn-primary auth-btn">
+            Login
+          </button>
+        </form>
+
+        <p className="auth-footer-text">
+          New here? <Link to="/register">Create an account</Link>
+        </p>
+      </div>
     </div>
   );
 }
-
