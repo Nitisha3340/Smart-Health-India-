@@ -1,0 +1,274 @@
+/* ----------------------------- */
+/* PAGE BACKGROUND               */
+/* ----------------------------- */
+
+.page-doctors {
+  min-height: 100vh;
+  padding: 48px 20px;
+  background: radial-gradient(circle at top left, #dbeafe 0%, #fdf2ff 40%, #f9fafb 100%);
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* soft floating blobs */
+.page-doctors::before,
+.page-doctors::after {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 999px;
+  filter: blur(60px);
+  opacity: 0.45;
+  z-index: 0;
+}
+
+.page-doctors::before {
+  top: -80px;
+  left: -40px;
+  background: #a5b4fc;
+}
+
+.page-doctors::after {
+  bottom: -80px;
+  right: -40px;
+  background: #7dd3fc;
+}
+
+/* ----------------------------- */
+/* MAIN CONTAINER                */
+/* ----------------------------- */
+
+.doctors-container {
+  width: 100%;
+  max-width: 1150px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ----------------------------- */
+/* HEADER                        */
+/* ----------------------------- */
+
+.doctors-header {
+  margin-bottom: 24px;
+}
+
+.doctors-header h1 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.04em;
+}
+
+.doctors-header p {
+  color: #64748b;
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+/* simple underline accent */
+.doctors-header h1::after {
+  content: "";
+  display: block;
+  margin-top: 6px;
+  width: 80px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #0ea5e9, #6366f1);
+}
+
+/* ----------------------------- */
+/* FILTERS – STACKED VERTICALLY  */
+/* ----------------------------- */
+
+.doctor-filters {
+  margin-top: 18px;
+  margin-bottom: 28px;
+  width: 100%;
+  max-width: 420px;
+  padding: 20px 20px 18px;
+  border-radius: 18px;
+
+  /* glassy card */
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 18px 40px rgba(15, 23, 42, 0.12),
+    0 0 0 1px rgba(148, 163, 184, 0.25);
+}
+
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}
+
+.filter-item:last-child {
+  margin-bottom: 0;
+}
+
+.filter-item label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 6px;
+}
+
+.filter-item select,
+.filter-item input {
+  padding: 9px 11px;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  font-size: 14px;
+  background: #f9fafb;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.filter-item select:focus,
+.filter-item input:focus {
+  border-color: #0ea5e9;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.22);
+}
+
+/* ----------------------------- */
+/* DOCTOR LIST                   */
+/* ----------------------------- */
+
+.doctor-list {
+  margin-top: 10px;
+}
+
+.doctor-grid {
+  display: grid;
+  gap: 22px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* ----------------------------- */
+/* DOCTOR CARD – PREMIUM STYLE   */
+/* ----------------------------- */
+
+.doctor-card {
+  position: relative;
+  padding: 20px 18px 18px;
+  border-radius: 20px;
+  overflow: hidden;
+
+  background: radial-gradient(circle at top left, #ffffff, #eef2ff);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow:
+    0 18px 40px rgba(15, 23, 42, 0.18),
+    0 0 0 1px rgba(148, 163, 184, 0.2);
+
+  color: #0f172a;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, translate 0.22s ease;
+}
+
+/* subtle glow overlay */
+.doctor-card::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at top, rgba(59, 130, 246, 0.18), transparent);
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
+.doctor-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 24px 55px rgba(15, 23, 42, 0.26),
+    0 0 0 1px rgba(148, 163, 184, 0.35);
+}
+
+.doctor-card:hover::before {
+  opacity: 1;
+}
+
+/* top header row */
+.doctor-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.doctor-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.doctor-speciality {
+  font-size: 14px;
+  color: #4b5563;
+}
+
+/* Doctor meta text */
+.doctor-location {
+  font-size: 13px;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+.doctor-subtext {
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 6px;
+}
+
+/* ----------------------------- */
+/* BOOK BUTTON – PILL GLOW       */
+/* ----------------------------- */
+
+.doctor-book-btn {
+  margin-top: 16px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  border: none;
+  width: 100%;
+
+  background: linear-gradient(135deg, #0ea5e9, #3b82f6);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 22px rgba(56, 189, 248, 0.55),
+    0 0 16px rgba(37, 99, 235, 0.6);
+
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.doctor-book-btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 14px 28px rgba(56, 189, 248, 0.65),
+    0 0 20px rgba(37, 99, 235, 0.7);
+}
+
+/* ----------------------------- */
+/* RESPONSIVE                    */
+/* ----------------------------- */
+
+@media (max-width: 768px) {
+  .page-doctors {
+    padding: 32px 14px;
+  }
+
+  .doctors-header h1 {
+    font-size: 26px;
+  }
+
+  .doctor-filters {
+    max-width: 100%;
+  }
+}

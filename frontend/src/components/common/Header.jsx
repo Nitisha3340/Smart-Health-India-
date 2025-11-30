@@ -1,9 +1,10 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 
 export default function Header() {
   const location = useLocation();
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const isActive = (path) =>
     location.pathname === path ? "navbar-link active" : "navbar-link";
@@ -88,7 +89,10 @@ export default function Header() {
           {user && (
             <button
               className="btn btn-small"
-              onClick={logout}
+              onClick={() => {
+                logout();
+                navigate("/login");
+              }}
               style={{ marginLeft: "8px" }}
             >
               Logout

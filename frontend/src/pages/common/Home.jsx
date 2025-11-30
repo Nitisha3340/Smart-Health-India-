@@ -1,8 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
+import { useAuth } from "../../contexts/AuthContext";
 import "./Home.css";
 
 export default function Home() {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState("");
   const recognitionRef = useRef(null);
@@ -73,7 +76,15 @@ export default function Home() {
           <Link to="/patient" className="home-nav-link">Patient</Link>
           <Link to="/profile" className="home-nav-link">My Profile</Link>
 
-          <button className="home-logout-btn">Logout</button>
+          <button
+            className="home-logout-btn"
+            onClick={() => {
+              logout();
+              navigate("/login");
+            }}
+          >
+            Logout
+          </button>
         </div>
       </div>
 
@@ -169,22 +180,18 @@ export default function Home() {
           <div className="role-cards-grid">
 
             {/* PATIENT */}
-            <div className="role-card role-card--patient">
-              <div className="role-card-content">
-                <div className="role-card-icon">👤</div>
-                <h3 className="role-card-title">Patients</h3>
-                <p className="role-card-text">
-                  Book appointments, consult virtually, and access prescriptions.
-                </p>
-                <Link to="/patient" className="role-card-btn">
-                  Go to Patient Dashboard →
-                </Link>
-                  <Link to="/doctor/patients/verify" className="btn btn-small btn-outline">
-                    View My Patients (for Doctors)
-                  </Link>
+            <div className="card card-patient">
+           <div className="card-icon">👤</div>
+           <h3>Patients</h3>
+              <p>
+              Book appointments, consult virtually, and access prescriptions.
+              </p>
+             <Link to="/doctor/patients/verify" className="btn btn-small btn-outline">
+              Patient Dashboard →
+             </Link>
 
-              </div>
-            </div>
+          </div>
+
 
             {/* DOCTOR */}
             <div className="role-card role-card--doctor">
