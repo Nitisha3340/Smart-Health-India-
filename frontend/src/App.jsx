@@ -25,6 +25,7 @@ import ManageUsers from "./pages/admin/ManageUsers";
 
 import RoleRoute from "./components/common/RoleRoute";
 import AuthGuardMessage from "./components/common/AuthGuardMessage";
+import ErrorBoundary from "./components/common/ErrorBoundary";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
       <div className="app-shell">
         <Header />
         <main className="app-main">
+          <ErrorBoundary>
 
           {/* ALL ROUTES MUST BE INSIDE <Routes> */}
           <Routes>
@@ -140,6 +142,7 @@ function App() {
             />
 
           </Routes>
+          </ErrorBoundary>
         </main>
       </div>
     </Router>
